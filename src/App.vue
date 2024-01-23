@@ -29,7 +29,7 @@ const removeTodo = (todo) => {
 
 onMounted( () => {
   name.value = localStorage.getItem('name') || ''
-  todos.value = JSon.parse(localStorage.getItem('todos')) || []
+  todos.value = JSON.parse(localStorage.getItem('todos')) || []
 })
 
 watch(name, (newVal) => {
@@ -83,10 +83,10 @@ watch(todos, (newVal) => {
     <section class="todo-list">
       <div class="list">
         <div v-for="todo in todos.slice().reverse()" :class="`todo-item ${todo.done ? 'done' : 'not-done'}`" :key="todo">
-        <lable>
+        <label>
           <input type="checkbox" v-model="todo.done" />
           <span :class="`bubble ${todo.category}`"></span>
-        </lable>
+        </label>
         <div class="todo-content">
           <input type="text" v-model="todo.content" />
         </div>
