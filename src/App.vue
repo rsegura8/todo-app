@@ -13,6 +13,7 @@ if(input_content.value.trim() === '' || input_category.value == null) {
 todos.value.push({
   content: input_content.value,
   category: input_category.value,
+  done: false,
 })
 
 input_content.value = ''
@@ -43,24 +44,38 @@ input_category.value = null
         <h4>Pick a Category</h4>
         <div class="options">
           <label>
-            <input type="radio" name="category" vlaue="business" v-model="input_category" />
+            <input type="radio" name="category" value="business" v-model="input_category" />
             <span class="bubble business"></span>
             <div>Business</div>
           </label>
 
           <label>
-            <input type="radio" name="category" vlaue="personal" v-model="input_category" />
+            <input type="radio" name="category" value="personal" v-model="input_category" />
             <span class="bubble personal"></span>
             <div>Personal</div>
           </label>
 
           <!-- {{ input_category }} -->
         </div>
+
+        <input type="submit" value="Add Todo" />
+
       </form>
     </section>
 
     <section class="todo-list">
-
+      <div class="list">
+        <div v-for="todo in todos" :class="`todo-item ${todo.done ? 'done' : 'not-done'}`" :key="todo">
+        <lable>
+          <input type="checkbox" v-model="todo.done" />
+          <span :class="`bubble ${todo.category}`"></span>
+        </lable>
+        <div class="todo-content">
+          <input type="text" v-model="todo.content" />
+        </div>
+        
+        </div>
+      </div>
     </section>
   </main>
 </template>
